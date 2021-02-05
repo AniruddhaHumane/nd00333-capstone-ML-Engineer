@@ -52,7 +52,13 @@ Through the following graph in the Azure's ML studio we can see how every model 
 
 ![BestRunsGraph](./starter_file/HyperDrive/screenshots/BestRunsGraph.png)
 
-We will now save this model and move on to the AutoML experiments
+Comparison of various models trained by Hyperdrive:
+
+![Comparison](./starter_file/HyperDrive/screenshots/comparison.png)
+
+Using above information We can see that as the `max_depth` increases the accuracy of the model increases. Along with this as the number of `estimators` increase the accuracy of the model increases.
+
+We will now save this best performing model and move on to the AutoML experiments
 
 
 ## AutoML
