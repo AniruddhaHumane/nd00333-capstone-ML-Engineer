@@ -25,38 +25,60 @@ For both the experiements, we have downloaded the csv file from the abovemention
 
 ## Architectural Diagram
 The Architectural diagram is as follows. This covers the most crucial steps we did in the project. 
-![Architecture](Architecture.png)
+![Architecture](./starter_file/Architecture.png)
 
 ## Hyperdrive 
 We are using the credit card fraud detection dataset downloaded from the Kaggle website. We downloaded the files using the Kaggle API and then uploaded them to the Azure ML studio's dataset section.
+
 ![scheduled run completed](16%20scheduled%20run%20completed.png)
+
 Then we created a compute instance for our notebooks to run and started the `hyperparemeter_tuning.ipynb` We imported all the necessary libraries, Created an experiement and fetched the dataset. 
+
 ![scheduled run completed](16%20scheduled%20run%20completed.png)
+
 Now we need to specify the Parameter sampler, Estimator and early stopping policy configurations so that we can use them in the hyperdrive configurations. These configurations are as follows.
+
 ![scheduled run completed](16%20scheduled%20run%20completed.png)
+
 We chose two parameters of the `RandomForestClassifier` that we are using for classification. `n_estimators` and `max_depth`. Using a randome choice and random int respectively we are training multiple models.
+
 After training we can get the best model which has the highest accuracy. We can also see the corresponding hyperparameters
+
 ![scheduled run completed](16%20scheduled%20run%20completed.png)
+
 Through the following graph in the Azure's ML studio we can see how every model performed.
+
 ![scheduled run completed](16%20scheduled%20run%20completed.png)
+
 We will now save this model and move on the AutoML experiments
+
 
 ## AutoML
 For this the process is similar. We wil use the exact same dataset and compute which we created before. And then specify an AutoML config. The details are explained in the image.
+
 ![scheduled run completed](16%20scheduled%20run%20completed.png)
+
 We will start the training of this AutoML experiement and wait for it to finish. As we can observe the AutoML trained multiple models including the RandomForestClassifier which we used in the HyperDrive experiment.
+
 ![scheduled run completed](16%20scheduled%20run%20completed.png)
+
 The details of the best performing models through AutoML are as follows
+
 ![scheduled run completed](16%20scheduled%20run%20completed.png)
 ![scheduled run completed](16%20scheduled%20run%20completed.png)
 ![scheduled run completed](16%20scheduled%20run%20completed.png)
+
 The best performing model was the VotingClassifier with an Area Under the Curve of 98.7%. This is a much better model than our previous hyperdrive model because of following reasons.
 1.	Due to the difference between the volume of non fraudulant and fraudulant transactions the previous model may have suffered from Accuracy Paradox.
 2.	The AutoML's Area Under the Curve consideres precision and recall and then estimates the performance of the model. Which means that our model has not overfitted to a class and performed well.
 3.	In the jupyter notebook we can see that the predicted values and the actual values are identical.
+
 Hence we have deployed the AutoML model and created an endpoint.
+
 ![scheduled run completed](16%20scheduled%20run%20completed.png)
+
 Then we have used this endpoint to predict the new input.
+
 ![scheduled run completed](16%20scheduled%20run%20completed.png)
 
 
