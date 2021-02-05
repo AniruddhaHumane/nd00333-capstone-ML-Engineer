@@ -68,7 +68,7 @@ The Details fro the RunWidget are as follows
 
 
 ![RunDetails1](./starter_file/AutoML/Screenshots/RunDetails1.png)
-![RunDetails2](./starter_file/AutoML/Screenshots/RunDetails2.png)
+[//]: # ![RunDetails2](./starter_file/AutoML/Screenshots/RunDetails2.png)
 
 The details of the best performing models through AutoML are as follows
 
