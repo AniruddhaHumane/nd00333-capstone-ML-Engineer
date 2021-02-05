@@ -73,8 +73,8 @@ We will start the training of this AutoML experiement and wait for it to finish.
 The Details from the `RunWidget` are as follows
 
 
-![RunDetails1](./starter_file/AutoML/Screenshots/RunDetails1.png)
-[//]: # ![RunDetails2](./starter_file/AutoML/Screenshots/RunDetails2.png)
+<!--- ![RunDetails1](./starter_file/AutoML/Screenshots/RunDetails1.png) -->
+![RunDetails2](./starter_file/AutoML/Screenshots/RunDetails2.png)
 
 The details of the best performing models through AutoML are as follows
 
