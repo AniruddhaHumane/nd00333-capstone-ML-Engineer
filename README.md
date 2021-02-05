@@ -2,7 +2,7 @@
 # Capstone - Azure Machine Learning Engineer
 
 ## Overview
-In this project, you are creating two models: one using Automated ML (denoted as AutoML from now on) and one customized model whose hyperparameters are tuned using HyperDrive. We specified various configurations for both the ways using which we will be generating our models. Once the models are trained we are going to deploy and consume the best performing model.
+In this project, you are creating two models: one using Automated ML and one customized model whose hyperparameters are tuned using HyperDrive. We specified AutoML Config and HyperDrive Config respectively to generate multiple models. Once the models are trained we identify the best performing model within the AutoML and Hyperdrive and then we deploy and consume the best performing model.
 
 ## Data
 We have taken the dataset from the Kaggle's credit card fraud detection datasets.
@@ -10,7 +10,7 @@ We have taken the dataset from the Kaggle's credit card fraud detection datasets
 The dataset contains Anonymized credit card transactions labeled as fraudulent or genuine. We are using AutoML and Hyperdrive to train various to identify if the transaction is fraudulant or not.
 
 
-#### Attribute Information:
+### Attribute Information:
 
 Input variables:  
 Time: Number of seconds elapsed between this transaction and the first transaction in the dataset
@@ -52,7 +52,7 @@ Through the following graph in the Azure's ML studio we can see how every model 
 
 ![BestRunsGraph](./starter_file/HyperDrive/screenshots/BestRunsGraph.png)
 
-We will now save this model and move on the AutoML experiments
+We will now save this model and move on to the AutoML experiments
 
 
 ## AutoML
@@ -60,11 +60,11 @@ For this the process is similar. We wil use the exact same dataset and compute w
 
 ![AutoMlConfig](./starter_file/AutoML/Screenshots/AutoMlConfig.png)
 
-We will start the training of this AutoML experiement and wait for it to finish. As we can observe the AutoML trained multiple models including the RandomForestClassifier which we used in the HyperDrive experiment.
+We will start the training of this AutoML experiement and wait for it to finish. As we can observe the AutoML trained multiple models including the `RandomForestClassifier` which we used in the HyperDrive experiment.
 
 ![AllChildRuns](./starter_file/AutoML/Screenshots/AllChildRuns.png)
 
-The Details fro the RunWidget are as follows
+The Details from the `RunWidget` are as follows
 
 
 ![RunDetails1](./starter_file/AutoML/Screenshots/RunDetails1.png)
@@ -100,7 +100,8 @@ Then we have used this endpoint to predict the new input.
 Here's a link to my Screen recording: https://www.awesomescreenshot.com/video/2655417?key=420b0fb1eca610211c15105bbf4c9143
 
 ## Standout Suggestions
-1. We could improve the accuracy of the model even more by including more data
+1. We could improve the accuracy of the model even more by including more data. This can not only handle the imbalanced data but could also improve the overall performance.
 2. We can perform some more preprocessing to the data like one hot encoding to make sure the data is more suitable for ML operations.
-3. We can also include deep learning and allow execution of the models for a longer time to find an even more accurate model
-4. We can also normalize the input data to make sure that the values are between 0 to 1. This retains the relative importance of the features.
+3. We can also include deep learning and allow execution of the models for a longer time to find an even more accurate model.
+4. We can use Oversampling techniques like SMOTE to oversample the minority data. This can address the data imbalance problem.
+5. We can also normalize the input data to make sure that the values are between 0 to 1. This retains the relative importance of the features.
