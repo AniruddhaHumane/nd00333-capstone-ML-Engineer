@@ -40,7 +40,39 @@ Now we need to specify the Parameter sampler, Estimator and early stopping polic
 
 ![HyperdriveConfigurations](./starter_file/HyperDrive/screenshots/HyperdriveConfigurations.png)
 
-We chose two parameters of the `RandomForestClassifier` that we are using for classification. `n_estimators` and `max_depth`. Using a randome choice and random int respectively we are training multiple models.
+    # TODO: Create an early termination policy. This is not required if you are using Bayesian sampling.
+    
+    etp = BanditPolicy( # BanditPolicy is based on slack factor/slack amount and evaluation interval. Bandit terminates runs where the primary metric is not within the specified slack factor/slack amount compared to the best performing run. Hence when the differnce between the previous models AUC is not within the range of slack factor Then the model training is terminated automatically.
+      slack_factor = 0.1,
+      evaluation_interval=3
+    )
+   
+    
+    ps = RandomParameterSampling( # Random Parameter Sampler supports discrete and continuous hyperparameters. As our resources are limited and time bounded. This is the best sampler we can use for low performance impact.
+      {
+        "--n_estimators": choice(25, 50, 75, 100),, # Default value for this is 100, Instead of randomly searching through all values for this. I created distinct choices which can reduce the number of runs and can show impact as the values change significantly.
+        "--max_depth": choice(2, 5, 10, 15) # Default value is None, which means it keeps spliting until theres only one member in the node. Using specific values can help us undersand how the primary matric varies with max_depth
+      }
+    )
+  
+    est = SKLearn( # because we are using the sci-kit learn's RandomForestClassifier. we have created an SKLearn estimator
+      source_directory = ".", 
+      compute_target = compute_target,
+      entry_script='train.py' # this train.py file contains all the details of fetching, preprocessing, splitting the data and training and saving the model.
+    )
+    
+    hyperdrive_run_config = HyperDriveConfig( # We created a HyperDriveConfig to make sure we specify all the necessary information for the hyperdrive experiement
+      estimator=est,
+      hyperparameter_sampling=ps,
+      policy=etp,
+      primary_metric_name='AUC_Weighted', # The primary goal is Area Under the Curve Weighted which is same as the AutoML models
+      primary_metric_goal=PrimaryMetricGoal.MAXIMIZE, # we want to maximize this as much as possible
+      max_total_runs=8, # max runs are limited to 8 so that our training finishes within the timeout
+      max_concurrent_runs=4 # this is same as the number of nodes available in our compute cluster
+    )
+    
+
+We chose two parameters of the `RandomForestClassifier` that we are using for classification. `n_estimators` and `max_depth`. Using a randome choice and random int respectively we are training multiple models. 
 
 ![allRuns](./starter_file/HyperDrive/screenshots/allRuns.png)
 
@@ -65,6 +97,24 @@ We will now save this best performing model and move on to the AutoML experiment
 For this the process is similar. We wil use the exact same dataset and compute which we created before. And then specify an AutoML config. The details are explained in the image.
 
 ![AutoMlConfig](./starter_file/AutoML/Screenshots/AutoMlConfig.png)
+
+    automl_settings = {
+    
+        "experiment_timeout_minutes":60, # To make sure the experiment finishes on time before the timeout as per lab instructions
+        "max_concurrent_iterations": 5, # To reach highest level of concurrency as per cluster configuration
+        "primary_metric" : 'AUC_weighted' # To identify the score of each model that AutoML trains
+    }
+    automl_config = AutoMLConfig(compute_target=compute_target, # To specify out compute target to run the experiment on
+                                 task = "classification", # We are identifying if the transaction is fraudulant or not
+                                 training_data=dataset, # Location of the dataset
+                                 label_column_name="Class", # Column name of the target variable
+    #                              path = project_folder,
+                                 enable_early_stopping= True, # To save the computation cost
+                                 featurization= 'auto', # So that our AutoMl performs best preprocessing to create features
+                                 debug_log = "automl_errors.log", # To store logs
+                                 **automl_settings
+                                )
+
 
 We will start the training of this AutoML experiement and wait for it to finish. As we can observe the AutoML trained multiple models including the `RandomForestClassifier` which we used in the HyperDrive experiment.
 
