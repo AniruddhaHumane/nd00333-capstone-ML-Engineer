@@ -40,6 +40,8 @@ Now we need to specify the Parameter sampler, Estimator and early stopping polic
 
 ![HyperdriveConfigurations](./starter_file/HyperDrive/screenshots/HyperdriveConfigurations.png)
 
+<b><i>Explanation of Config used</b></i>
+
     # TODO: Create an early termination policy. This is not required if you are using Bayesian sampling.
     
     etp = BanditPolicy( # BanditPolicy is based on slack factor/slack amount and evaluation interval. Bandit terminates runs where the primary metric is not within the specified slack factor/slack amount compared to the best performing run. Hence when the differnce between the previous models AUC is not within the range of slack factor Then the model training is terminated automatically.
@@ -97,6 +99,8 @@ We will now save this best performing model and move on to the AutoML experiment
 For this the process is similar. We wil use the exact same dataset and compute which we created before. And then specify an AutoML config. The details are explained in the image.
 
 ![AutoMlConfig](./starter_file/AutoML/Screenshots/AutoMlConfig.png)
+
+<b><i>Explanation of Config used</b></i>
 
     automl_settings = {
     
