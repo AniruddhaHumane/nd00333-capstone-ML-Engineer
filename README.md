@@ -74,7 +74,7 @@ Now we need to specify the Parameter sampler, Estimator and early stopping polic
     )
     
 
-We chose two parameters of the `RandomForestClassifier` that we are using for classification. `n_estimators` and `max_depth`. Using a randome choice and random int respectively we are training multiple models. 
+We chose two parameters of the `RandomForestClassifier` that we are using for classification. `n_estimators` and `max_depth`. Using a randome choice we are training multiple models. Through the following graph in the Azure's ML studio we can see how every model performed.
 
 ![allRuns](./starter_file/HyperDrive/screenshots/allRuns.png)
 
