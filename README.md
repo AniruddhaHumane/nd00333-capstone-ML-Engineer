@@ -157,7 +157,7 @@ Then we have used this endpoint to predict the new input.
 
 
 ## Screen Recording
-Here's a link to my Screen recording: https://www.awesomescreenshot.com/video/2655417?key=420b0fb1eca610211c15105bbf4c9143
+Here's a link to my Screen recording: https://www.awesomescreenshot.com/video/2667559?key=97bbedde534623f79e78741167e2d109
 
 ## Standout Suggestions
 1. We could improve the accuracy of the model even more by including more data. This can not only handle the imbalanced data but could also improve the overall performance.
