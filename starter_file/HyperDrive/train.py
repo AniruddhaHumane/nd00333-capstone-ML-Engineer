@@ -10,6 +10,7 @@ from azureml.core.run import Run
 from azureml.data.dataset_factory import TabularDatasetFactory
 from sklearn.impute import SimpleImputer
 import pandas as pd
+from sklearn.metrics import roc_auc_score
 
 run = Run.get_context()
 ws = run.experiment.workspace
@@ -49,14 +50,15 @@ def main():
 
     model = RandomForestClassifier(n_estimators=args.n_estimators, max_depth=args.max_depth).fit(x_train, y_train)
 
-    accuracy = model.score(x_test, y_test)
-    run.log("Accuracy", np.float(accuracy))
+    # accuracy = model.score(x_test, y_test)
+    auc = roc_auc_score(y_test, model.predict_proba(x_test)[:,1], average="weighted")
+    run.log("AUC_weighted", np.float(auc))
     
     #Missing part, need to serialize the model once it is trained, because azure only maintains logs and not the model.
 #     if not os.path.isdir('./runs'):
 #         os.mkdir('./runs')
     os.makedirs('outputs', exist_ok=True)
-    joblib.dump(model, 'outputs/run_'+str(accuracy)+"__"+str(args.n_estimators)+"_"+str(args.max_depth)+'.joblib')
+    joblib.dump(model, 'outputs/run_'+str(auc)+"__"+str(args.n_estimators)+"_"+str(args.max_depth)+'.joblib')
 
 if __name__ == '__main__':
     main()
