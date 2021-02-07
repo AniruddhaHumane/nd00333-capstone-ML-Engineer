@@ -142,10 +142,10 @@ I also exported the model explanation so that we can see which of the features f
 ![Explanation2](./starter_file/AutoML/Screenshots/Explanation2.png)
 ![Explanation3](./starter_file/AutoML/Screenshots/Explanation3.png)
 
-The best performing model was the VotingClassifier with an Area Under the Curve of 98.7%. This is a much better model than our previous hyperdrive model because of following reasons.
-1.	Due to the difference between the volume of non fraudulant and fraudulant transactions the previous model may have suffered from Accuracy Paradox.
-2.	The AutoML's Area Under the Curve consideres precision and recall and then estimates the performance of the model. Which means that our model has not overfitted to a class and performed well.
-3.	In the jupyter notebook we can see that the predicted values and the actual values are identical.
+The best performing model was the VotingClassifier. This is a much better model than our previous hyperdrive model because of following reasons.
+1. The Area Under the Curve of AutoML's VotingClassifier was 98.7% which is better than the model created by hyperdrive which is 98.2%.
+1.	The AutoML's Area Under the Curve consideres precision and recall and then estimates the performance of the model. Which means that our model has not overfitted to a class and performed well.
+2.	In the jupyter notebook we can see that the predicted values and the actual values are identical. Which means that out model is predicting really well.
 
 Hence we have deployed the AutoML model and created an endpoint.
 
