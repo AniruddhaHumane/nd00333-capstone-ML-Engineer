@@ -86,10 +86,6 @@ After training we can get the best model which has the highest accuracy. We can 
 
 ![BestModel](./starter_file/HyperDrive/screenshots/BestModel.png)
 
-Through the following graph in the Azure's ML studio we can see how every model performed.
-
-![BestRunsGraph](./starter_file/HyperDrive/screenshots/BestRunsGraph.png)
-
 Comparison of various models trained by Hyperdrive:
 
 ![Comparison](./starter_file/HyperDrive/screenshots/comparison.png)
