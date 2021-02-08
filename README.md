@@ -78,6 +78,10 @@ We chose two parameters of the `RandomForestClassifier` that we are using for cl
 
 ![allRuns](./starter_file/HyperDrive/screenshots/allRuns.png)
 
+Here's a screenshot of the runDetails widget.
+
+![allRuns](./starter_file/HyperDrive/screenshots/RunWidget.png)
+
 After training we can get the best model which has the highest accuracy. We can also see the corresponding hyperparameters
 
 ![BestModel](./starter_file/HyperDrive/screenshots/BestModel.png)
@@ -92,7 +96,11 @@ Comparison of various models trained by Hyperdrive:
 
 Using above information We can see that as the `max_depth` increases the accuracy of the model increases. Along with this as the number of `estimators` increase the accuracy of the model increases.
 
-We will now save this best performing model and move on to the AutoML experiments
+We will now save and register this best performing model and move on to the AutoML experiments
+
+![register](./starter_file/HyperDrive/screenshots/register.png)
+
+
 
 
 ## AutoML
